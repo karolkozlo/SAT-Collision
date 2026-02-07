@@ -13,15 +13,8 @@ int main() {
     int rectY = windowHeight / 4;
     int rectWidth = 60;
     int rectHeight = 60;
-    int rectMoveSpeed = 8;
-    int rectYDirection = 1;
-    Entity player{{windowWidth / 4, windowHeight / 4}, 60, 60};
-    Entity otherThing{{(windowWidth / 50) + 400, (windowHeight / 4) + 100}, 60, 60};
-    //Rect Collision
-    int lRectX{rectX};
-    int rRectX{rectX + rectWidth};
-    int uRectY{rectY};
-    int bRectY{rectY + rectHeight};
+    Entity player{{windowWidth / 4, windowHeight / 4}, 60, 60, BLUE};
+    Entity otherThing{{(windowWidth / 50) + 400, (windowHeight / 4) + 100}, 60, 60, RED};
 
 
     while (!WindowShouldClose()) {

@@ -1,11 +1,11 @@
 #include <Entity.h>
 #include <raymath.h>
 
-Entity::Entity(Vector2 position, float width, float height) {
+Entity::Entity(Vector2 position, float width, float height, Color color) {
     this->position = position;
     this->width = width;
     this->height = height;
-
+    this->color = color;
 }
 
 Rectangle Entity::GetCollisionRect() {
@@ -22,5 +22,5 @@ Vector2 Entity::GetPosition() {
 }
 
 void Entity::Tick(float deltaTime) {
-    DrawRectangle(this->position.x, this->position.y, this->width, this->height, BLUE);
+    DrawRectangle(this->position.x, this->position.y, this->width, this->height, this->color);
 }
