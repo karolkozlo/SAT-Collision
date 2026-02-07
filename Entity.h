@@ -6,9 +6,9 @@ class Entity {
     public:
         Entity(Vector2 position, float width, float height, Color color);
         Rectangle GetCollisionRect();
-        Vector2 GetPosition();
-        void Tick(float deltaTime);
-    private:
+        virtual Vector2 GetPosition();
+        virtual void Tick(float deltaTime);
+    protected:
         Vector2 position;
         float width;
         float height;
