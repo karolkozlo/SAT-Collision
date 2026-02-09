@@ -1,8 +1,8 @@
 #include <Player.h>
 #include <raymath.h>
 
-Player::Player(Vector2 position, float width, float height, Color color)
-    : Entity(position, width, height, color) {
+Player::Player(Vector2 position, float width, float height, Color color, float rotation)
+    : Entity(position, width, height, color, rotation) {
 
 }
 
@@ -17,5 +17,6 @@ void Player::Tick(float deltaTime) {
     }
     velocity = {};
 
-    DrawRectangle(this->position.x, this->position.y, this->width, this->height, this->color);
+    Rectangle rect{this->position.x, this->position.y, this->width, this->height};
+    DrawRectanglePro(rect, {this->width / 2, this->height / 2}, this->rotation, this->color);
 }

@@ -4,7 +4,7 @@
 
 class Entity {
     public:
-        Entity(Vector2 position, float width, float height, Color color);
+        Entity(Vector2 position, float width, float height, Color color, float rotation = 0);
         Rectangle GetCollisionRect();
         virtual Vector2 GetPosition();
         virtual void Tick(float deltaTime);
@@ -13,6 +13,7 @@ class Entity {
         float width;
         float height;
         Color color;
+        float rotation;
 };
 
 #endif

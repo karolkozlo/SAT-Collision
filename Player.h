@@ -5,7 +5,7 @@
 
 class Player : public Entity {
     public:
-        Player(Vector2 position, float width, float height, Color color);
+        Player(Vector2 position, float width, float height, Color color, float rotation = 0);
         virtual void Tick(float deltaTime) override;
     private:
         float moveSpeed = 400;
