@@ -10,7 +10,13 @@ int main() {
     SetTargetFPS(60);
 
     Player player{{windowWidth / 4, windowHeight / 4}, 60, 60, BLUE};
-    Entity otherThing{{(windowWidth / 50) + 400, (windowHeight / 4) + 100}, 60, 60, RED};
+    std::vector<Vector2> otherPoints = {
+        {0, 0},
+        {60, 0},
+        {60, 60},
+        {0, 60}
+    };
+    Entity otherThing{{(windowWidth / 50) + 400, (windowHeight / 4) + 100}, otherPoints, RED};
 
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
