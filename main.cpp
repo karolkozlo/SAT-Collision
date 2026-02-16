@@ -4,8 +4,8 @@
 #include <Player.h>
 
 int main() {
-    int windowWidth = 800;
-    int windowHeight = 600;
+    float windowWidth = 800;
+    float windowHeight = 600;
     InitWindow(windowWidth, windowHeight, "SAT Collision");
     SetTargetFPS(60);
 
@@ -16,7 +16,7 @@ int main() {
         {60, 60},
         {0, 60}
     };
-    Entity otherThing{{(windowWidth / 50) + 400, (windowHeight / 4) + 100}, otherPoints, RED};
+    Entity otherThing{{(windowWidth / 50.f) + 400.f, (windowHeight / 4.f) + 100.f}, otherPoints, RED};
 
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
@@ -26,5 +26,5 @@ int main() {
         otherThing.Tick(deltaTime);
         EndDrawing();
     }
-     CloseWindow();
+    CloseWindow();
 }

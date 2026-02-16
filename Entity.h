@@ -11,8 +11,8 @@ class Entity {
         virtual Vector2 GetPosition();
         virtual void Tick(float deltaTime);
         void DrawShape();
-        void DrawOutline();
-        // void DrawFill();
+        void DrawOutline(std::vector<Vector2>& points);
+        void DrawFill(std::vector<Vector2>& points);
     protected:
         Vector2 position;
         ConvexPoly shape;
