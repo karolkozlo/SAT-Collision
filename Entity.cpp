@@ -1,32 +1,14 @@
 #include <Entity.h>
 #include <raymath.h>
 
-Entity::Entity(Vector2 position, float width, float height, Color color, float rotation) {
-    this->position = position;
-    this->width = width;
-    this->height = height;
-    this->color = color;
-    this->rotation = rotation;
-}
-
 Entity::Entity(Vector2 position, std::vector<Vector2> points, Color color, float rotation) {
     this->position = position;
     this->color = color;
-    this->rotation = rotation;
 
     this->shape.angleRadians = rotation;
     this->shape.center = position;
     this->shape.localVertices = points;
 }
-
-Rectangle Entity::GetCollisionRect() {
-    return Rectangle{
-        GetPosition().x,
-        GetPosition().y,
-        width,
-        height
-    };
-};
 
 Vector2 Entity::GetPosition() {
     return position;

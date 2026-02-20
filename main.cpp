@@ -9,7 +9,13 @@ int main() {
     InitWindow(windowWidth, windowHeight, "SAT Collision");
     SetTargetFPS(60);
 
-    Player player{{windowWidth / 4, windowHeight / 4}, 60, 60, BLUE};
+    std::vector<Vector2> playerPoints = {
+        {0, 0},
+        {60, 0},
+        {60, 60},
+        {0, 60}
+    };
+    Player player{{windowWidth / 4, windowHeight / 4}, playerPoints, BLUE};
     std::vector<Vector2> otherPoints = {
         {0, 0},
         {60, 0},
