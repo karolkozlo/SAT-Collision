@@ -11,9 +11,9 @@ class Entity {
         void DrawShape();
         void DrawOutline(std::vector<Vector2>& points);
         void DrawFill(std::vector<Vector2>& points);
+        ConvexPoly shape;
     protected:
         Vector2 position;
-        ConvexPoly shape;
         Color color;
 };
 

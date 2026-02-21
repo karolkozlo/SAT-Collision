@@ -30,6 +30,12 @@ int main() {
         ClearBackground(WHITE);
         player.Tick(deltaTime);
         otherThing.Tick(deltaTime);
+
+        // Check collision
+        SATResult collisionResult = ConvexPoly::SATCollision(player.shape, otherThing.shape);
+        if (collisionResult.intersect) {
+            DrawLineV(player.shape.center, Vector2Add(player.shape.center, collisionResult.mtv), YELLOW);
+        }
         EndDrawing();
     }
     CloseWindow();

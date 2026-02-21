@@ -35,16 +35,7 @@ static void ProjectOntoAxis(std::vector<Vector2>& verts, Vector2& axis, float& o
     }
 }
 
-
-struct SATResult {
-    bool intersect = false;
-    float penetration = 0.0f;
-    Vector2 axis = {0, 0};
-    // Minimum Translation Vector
-    Vector2 mtv  = {0, 0};
-};
-
-SATResult SATCollision(ConvexPoly& a, ConvexPoly& b) {
+SATResult ConvexPoly::SATCollision(ConvexPoly& a, ConvexPoly& b) {
     SATResult result;
     std::vector<Vector2> aVerts = a.GetWorldPoints();
     std::vector<Vector2> bVerts = b.GetWorldPoints();

@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <vector>
 #include <cmath>
+#include <SATResult.h>
 
 class ConvexPoly {
     public:
@@ -10,6 +11,7 @@ class ConvexPoly {
         float angleRadians = 0.f;
         std::vector<Vector2> localVertices;
         std::vector<Vector2> GetWorldPoints();
+        static SATResult SATCollision(ConvexPoly& a, ConvexPoly& b);
 };
 
 #endif
