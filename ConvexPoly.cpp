@@ -1,5 +1,6 @@
 #include <ConvexPoly.h>
 #include <raymath.h>
+#include <limits>
 
 static inline Vector2 Rotate(const Vector2& v, float cos, float sin) {
     return {v.x * cos - v.y * sin,
@@ -32,6 +33,63 @@ static void ProjectOntoAxis(std::vector<Vector2>& verts, Vector2& axis, float& o
             outMax = dot;
         }
     }
+}
+
+
+struct SATResult {
+    bool intersect = false;
+    float penetration = 0.0f;
+    Vector2 axis = {0, 0};
+    // Minimum Translation Vector
+    Vector2 mtv  = {0, 0};
+};
+
+SATResult SATCollision(ConvexPoly& a, ConvexPoly& b) {
+    SATResult result;
+    std::vector<Vector2> aVerts = a.GetWorldPoints();
+    std::vector<Vector2> bVerts = b.GetWorldPoints();
+
+    if (aVerts.size() < 3 || bVerts.size() < 3) {
+        return result;
+    }
+
+    std::vector<Vector2> axes;
+    axes.reserve(aVerts.size() + bVerts.size());
+    ComputeAxes(aVerts, axes);
+    ComputeAxes(bVerts, axes);
+
+
+    Vector2 bestAxis = {0, 0};
+    Vector2 centersDelta = Vector2Subtract(b.center, a.center);
+    float minOverlap = std::numeric_limits<float>::infinity();
+
+    for (Vector2& axis : axes) {
+        float aMin, aMax, bMin, bMax;
+        ProjectOntoAxis(aVerts, axis, aMin, aMax);
+        ProjectOntoAxis(bVerts, axis, bMin, bMax);
+        float max = aMax < bMax ? aMax : bMax;
+        float min = aMin > bMin ? aMin : bMin;
+        float overlap = max - min;
+        if (overlap <= 0) {
+            result.intersect = false;
+            return result;
+        }
+
+        if (overlap < minOverlap) {
+            minOverlap = overlap;
+            bestAxis = axis;
+        }
+    }
+
+    if (Vector2DotProduct(bestAxis, centersDelta) < 0) {
+        bestAxis = Vector2Negate(bestAxis);
+    }
+
+    result.intersect = true;
+    result.axis = bestAxis;
+    result.penetration = minOverlap;
+    result.mtv = Vector2Scale(bestAxis, minOverlap);
+    return result;
 }
 
 std::vector<Vector2> ConvexPoly::GetWorldPoints() {
