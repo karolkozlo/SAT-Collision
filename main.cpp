@@ -23,7 +23,13 @@ int main() {
         {-10, 60}
     };
     Entity otherThing{{(windowWidth / 50.f) + 400.f, (windowHeight / 4.f) + 100.f}, otherPoints, RED};
-    std::vector<ConvexPoly*> obstacles{ &otherThing.shape };
+    std::vector<Vector2> otherPoints2 = {
+        {0, 0},
+        {60, 0},
+        {-10, 60},
+    };
+    Entity otherThing2{{(windowWidth / 50.f) + 250.f, (windowHeight / 4.f) + 180.f}, otherPoints2, RED};
+    std::vector<ConvexPoly*> obstacles{ &otherThing.shape, &otherThing2.shape };
 
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
@@ -32,7 +38,8 @@ int main() {
 
         player.Tick(deltaTime, obstacles);
         otherThing.Tick(deltaTime);
-        
+        otherThing2.Tick(deltaTime);
+
         EndDrawing();
     }
     CloseWindow();
