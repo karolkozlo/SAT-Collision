@@ -23,19 +23,16 @@ int main() {
         {-10, 60}
     };
     Entity otherThing{{(windowWidth / 50.f) + 400.f, (windowHeight / 4.f) + 100.f}, otherPoints, RED};
+    std::vector<ConvexPoly*> obstacles{ &otherThing.shape };
 
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
         BeginDrawing();
         ClearBackground(WHITE);
-        player.Tick(deltaTime);
-        otherThing.Tick(deltaTime);
 
-        // Check collision
-        SATResult collisionResult = ConvexPoly::SATCollision(player.shape, otherThing.shape);
-        if (collisionResult.intersect) {
-            DrawLineV(player.shape.center, Vector2Add(player.shape.center, collisionResult.mtv), YELLOW);
-        }
+        player.Tick(deltaTime, obstacles);
+        otherThing.Tick(deltaTime);
+        
         EndDrawing();
     }
     CloseWindow();
